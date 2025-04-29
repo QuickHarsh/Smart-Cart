@@ -123,11 +123,8 @@ const SmartSuggestions = () => {
     setProducts([])
     setError('')
 
-    try {
-      // Try AI-powered suggestions first
-      try {
-        // Build a prompt for Gemini
-        const prompt = `Suggest 5 smart shopping items for:
+    // Build a prompt for Gemini
+    const prompt = `Suggest 5 smart shopping items for:
 - Product type: ${inputs.type || 'Any'}
 - Category: ${inputs.category || 'Any'}
 - Price range: ${inputs.minPrice || 'Any'} to ${inputs.maxPrice || 'Any'} INR
@@ -135,32 +132,23 @@ const SmartSuggestions = () => {
 - Minimum rating: ${inputs.minRating || 'Any'}
 Give the suggestions as a list with a short reason for each.`
 
-        const result = await generateContent(prompt)
-        const suggestions = result.candidates[0].content.parts[0].text
-        
-        // Extract product names from suggestions
-        const productNames = suggestions.split('\n')
-          .filter(line => line.trim())
-          .map(line => line.split('.')[1]?.trim() || '')
-          .filter(name => name)
+    try {
+      const result = await generateContent(prompt)
+      const suggestions = result.candidates[0].content.parts[0].text
+      
+      // Extract product names from suggestions
+      const productNames = suggestions.split('\n')
+        .filter(line => line.trim())
+        .map(line => line.split('.')[1]?.trim() || '')
+        .filter(name => name)
 
-        // Fetch real products for each suggestion
-        for (const name of productNames) {
-          await fetchProducts(name)
-        }
-      } catch (aiError) {
-        console.error('AI suggestions failed, falling back to direct search:', aiError)
-        
-        // Fallback: Direct product search using input type or category
-        const searchQuery = inputs.type || inputs.category || 'popular products'
-        await fetchProducts(searchQuery)
-        
-        // Show a user-friendly message about the fallback
-        setError('AI suggestions are temporarily unavailable. Showing direct search results instead.')
+      // Fetch real products for each suggestion
+      for (const name of productNames) {
+        await fetchProducts(name)
       }
     } catch (err) {
-      setError('Failed to fetch products. Please try again or refine your search criteria.')
-      console.error('Error in product search:', err)
+      setError('Failed to generate suggestions. Please try again.')
+      console.error('Error generating suggestions:', err)
     } finally {
       setLoading(false)
     }

@@ -177,7 +177,7 @@ const SmartSuggestionsPage = () => {
               className="flex-1 bg-white/80 dark:bg-gray-800/60 rounded-lg"
               InputProps={{
                 className: 'font-serif',
-                startAdornment: <Search className="h-5 w-5 mr-2 text-gray-400" />
+                startAdornment: <Search className="h-5 w-5 mr-2 text-gray-400 dark:text-gray-500" />
               }}
               fullWidth
             />
@@ -259,7 +259,7 @@ const SmartSuggestionsPage = () => {
                   size="small"
                   InputProps={{
                     readOnly: true,
-                    startAdornment: <span className="text-gray-500">₹</span>
+                    startAdornment: <span className="text-gray-500 dark:text-gray-400">₹</span>
                   }}
                 />
                 <TextField
@@ -268,7 +268,7 @@ const SmartSuggestionsPage = () => {
                   size="small"
                   InputProps={{
                     readOnly: true,
-                    startAdornment: <span className="text-gray-500">₹</span>
+                    startAdornment: <span className="text-gray-500 dark:text-gray-400">₹</span>
                   }}
                 />
               </div>
@@ -402,17 +402,17 @@ const SmartSuggestionsPage = () => {
                     <Chip
                       label={`${product.reviews} reviews`}
                       size="small"
-                      className="bg-gray-100 text-gray-600"
+                      className="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300"
                     />
                   </div>
                   <Typography variant="h6" className="text-primary-600 font-bold mb-2">
                     ₹{product.price.toLocaleString()}
                   </Typography>
-                  <Typography variant="body2" className="text-gray-500 mb-2">
+                  <Typography variant="body2" className="text-gray-500 dark:text-gray-400 mb-2">
                     Sold by: {product.seller}
                   </Typography>
                   {viewMode === 'list' && (
-                    <Typography variant="body2" className="text-gray-600 mb-4 line-clamp-2">
+                    <Typography variant="body2" className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
                       {product.description}
                     </Typography>
                   )}

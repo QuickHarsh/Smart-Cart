@@ -10,10 +10,14 @@
     font-family: 'Inter', sans-serif;
   }
   .dark body {
-    @apply bg-gray-950 text-gray-100 !bg-none;
+    @apply bg-gray-950 text-white !bg-none;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', serif;
+    @apply text-gray-900 dark:text-white;
+  }
+  p, span, div {
+    @apply text-gray-900 dark:text-white;
   }
 }
 
@@ -78,7 +82,7 @@
 
 /* Glass effect */
 .glass {
-  @apply bg-white/80 dark:bg-gray-800/30 backdrop-blur-lg border border-white/20 dark:border-gray-700/30;
+  @apply bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg;
 }
 
 /* Dark mode specific styles */
@@ -97,4 +101,13 @@
 /* Enhanced dark mode transitions */
 .dark {
   @apply transition-colors duration-300;
+}
+
+.shadow-glow {
+  @apply shadow-lg hover:shadow-xl transition-shadow duration-300;
+}
+
+/* Form inputs */
+input, textarea, select {
+  @apply bg-white dark:bg-gray-800 text-gray-900 dark:text-white;
 }
